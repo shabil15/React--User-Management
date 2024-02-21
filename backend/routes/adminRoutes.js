@@ -5,7 +5,7 @@ import {
   authAdmin,
   blockUnblockUser,
   deleteUser,
-  getUsers,
+  getUsers, 
   logoutAdmin,
   updateUserProfile,
 } from "../controllers/adminController.js";

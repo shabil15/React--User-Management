@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <ToastContainer autoClose={2000} />
-      <Outlet /> 
+      <Outlet />  
     </>
   );
 }

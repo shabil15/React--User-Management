@@ -44,7 +44,7 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${ADMIN_URL}/users/unblock-block?id=${data}`,
         method: "PATCH",
-      }),
+      }), 
     }),
   }),
 });
