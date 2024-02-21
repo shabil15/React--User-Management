@@ -1,27 +1,20 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../slices/userApiSlice";
 import { toast } from "react-toastify";
-import { setCredential } from "../slices/authSlices";
 
-function Register() {
+function AddNewUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [register] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
 
   const submitRegisterHandler = async (e) => {
     e.preventDefault();
@@ -53,8 +46,7 @@ function Register() {
     } else {
       try {
         const res = await register({ name, email, password, mobile }).unwrap();
-        dispatch(setCredential({ ...res }));
-        navigate("/");
+        navigate("/dashboard");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
@@ -64,8 +56,8 @@ function Register() {
   return (
     <div>
       <div className="flex justify-center items-center h-svh">
-        <div className=" flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-          <div className=" mx-4 -mt-6 mb-4 grid h-28 place-items-center  ">
+        <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+           <div className=" mx-4 -mt-6 mb-4 grid h-28 place-items-center  ">
           <a
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -74,7 +66,7 @@ function Register() {
           Opus Blitz
         </a>
             <h3 className="block font-sans text-3xl font-semibold leading-snug tracking-normal text-black antialiased">
-              Sign up
+              Add New User
             </h3>
           </div>
 
@@ -149,19 +141,19 @@ function Register() {
               onClick={submitRegisterHandler}
               data-ripple-light="true"
               type="button"
-              className="block w-full select-none rounded-lg bg-gradient-to-tr from-blue-900 to-blue-800 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-bluw-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="block w-full select-none rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             >
-              Sign up
+              Add New User
             </button>
-            <p className="mt-6 flex justify-center font-sans text-sm font-light leading-normal text-inherit antialiased">
+            {/* <p className="mt-6 flex justify-center font-sans text-sm font-light leading-normal text-inherit antialiased">
               Already have an acount ?
               <NavLink
-                className="ml-1 block font-sans text-sm font-bold leading-normal text-blue-800 antialiased"
+                className="ml-1 block font-sans text-sm font-bold leading-normal text-blue-500 antialiased"
                 to={"/login"}
               >
                 Sign In
               </NavLink>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
@@ -169,4 +161,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default AddNewUser;

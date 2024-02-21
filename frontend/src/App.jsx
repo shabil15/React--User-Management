@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
+import "./App.css";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 
-const App = () => {
+function App() {
   return (
     <>
-    <ToastContainer/>
-    <Outlet/>
+      <ToastContainer autoClose={2000} />
+      <Outlet />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
